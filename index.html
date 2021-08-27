@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        .container {
+            height: 100vh;
+            /* max-width: 992px; */
+            margin: 0 auto;
+            padding: 2.5rem 2rem;
+            display: flex;
+
+        }
+
+        body,
+        input,
+        button {
+            font: 400 1rem 'Roboto', sans-serif;
+        }
+
+        .container section {
+            flex: 1;
+            /* display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6.25rem;
+            align-content: center; */
+        }
+
+        form {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin: .8rem 0;
+        }
+
+        input {
+            height: 50px;
+            border-radius: 8px;
+            padding: 0 16px;
+            background: #FFF;
+            border: 1px solid #a8a8b3;
+        }
+
+        h2 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #494D4B;
+        }
+
+        #left form button {
+            margin-top: 0.8rem;
+            height: 50px;
+            border-radius: 8px;
+            font-weight: 500;
+            background: #835afd;
+            color: #FFF;
+            padding: 0 32px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+            border: 0;
+        }
+
+        #rigth form {
+            position: relative;
+        }
+
+        #rigth form input {
+            padding-right: 4.6em;
+        }
+
+        #rigth button {
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-bottom-right-radius: 8px;
+            border-top-right-radius: 8px;
+            width: 4.4em;
+            height: 50px;
+            border: 0;
+
+        }
+
+        .opcoes {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+
+        .btnCadastro button {
+            height: 50px;
+            border-radius: 8px;
+            font-weight: 500;
+            background: #835afd;
+            color: #FFF;
+            padding: 0 32px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            cursor: pointer;
+            border: 0;
+        }
+
+        #header,
+        #nodes {
+            margin-top: .95rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 12px;
+            text-align: center;
+            gap: 20px;
+        }
+
+
+        i {
+            cursor: pointer;
+            transition: all .2s;
+        }
+
+        i:hover {
+            color: red;
+        }
+
+        input[type='file'] {
+            display: none
+        }
+
+        .input-wrapper label {
+            background-color: #3498db;
+            border-radius: 5px;
+            color: #fff;
+            margin: 10px;
+            padding: 6px 20px
+        }
+
+        .input-wrapper label:hover {
+            background-color: #2980b9
+        }
+
+        @media (max-width: 900px) {
+            html {
+                font-size: 87.5%;
+            }
+
+            .container {
+                display: block;
+                padding: 0;
+            }
+
+            #header {
+                display: none;
+            }
+
+            #nodes {
+                grid-template-columns: auto;
+            }
+        }
+
+        @media (min-width: 901px) {
+            html {
+                font-size: 93.75%;
+            }
+        }
+    </style>
+    <title>Your First DB App</title>
+</head>
+
+<body>
+    <div class="container">
+        <section id="left">
+            <button id="loadDb">Carregar todos os contatos</button>
+            <button id="queryDb">Apagar banco de dados</button>
+            <div class="opcoes" id="opcoes">
+                <h4>Voce pode importar os dados de contato de um arquivo json, no formato: <p> [{"name: value", "email":
+                        value,
+                        "tel": value}]</p>
+                </h4>
+                <div class='input-wrapper'>
+                    <label for='json'>
+                        Selecionar um arquivo
+                    </label>
+                    <input id='json' type='file' value='' />
+                    <span id='file-name'></span>
+                </div>
+
+            </div>
+
+            <h2>Cadastro novo contato</h2>
+            <form onsubmit="onSubmit()">
+                <label for="name">Name</label>
+                <input name="name" id="name">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email">
+                <label for="tel">Telefone</label>
+                <input type="tel" name="tel" id="tel">
+                <button type="submit">Gravar</button>
+
+            </form>
+
+
+        </section>
+        <section id="rigth">
+            <form onsubmit="pesquisa()">
+                <input type="search" placeholder="Pesquise por um contato" id="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <div id="header">
+                <span>Nome</span>
+                <span>E-mail</span>
+                <span>Telefone</span>
+                <span></span>
+            </div>
+            <div id="nodes"></div>
+        </section>
+    </div>
+</body>
+<script src="./utils/app.js"></script>
+
+</html>
